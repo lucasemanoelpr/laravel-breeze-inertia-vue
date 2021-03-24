@@ -15,7 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Products/Index');
+        return Inertia::render('Products/Index', [
+            'products' => Product::all()
+        ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
