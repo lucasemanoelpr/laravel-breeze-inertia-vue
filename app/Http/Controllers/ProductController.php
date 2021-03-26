@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -27,7 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        
+        return Inertia::render('Products/Create');
     }
 
     /**
@@ -38,7 +39,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+        ]);
+
+        Product::create($request->only(['name', 'price', 'active']));
+
+        return Redirect::route('products.index');
     }
 
     /**
